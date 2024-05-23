@@ -13,7 +13,27 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      backgroundColor:{
+        "asGray" : "#384B52",
+        "gray" : "#5D7581",
+        "skyBlue" : "#D8E6EF",
+        "yellow" : "#FCEDB2",
+        "peach" : "#F4BC9B",
+      },
+      textColor:{
+        "white": "#F5F5F5",
+        "black": "#0F0E0E"
+      },
     },
+    fontFamily: {
+      'JotiOne': ['Logo', 'sans-serif'],
+      'regular': ['MontserratRegular', 'sans-serif'],
+      'black': ['MontserratBlack', 'sans-serif'],
+      'semiBold': ['MontserratSemiBold', 'sans-serif'],
+      'robotoBlack': ['robotoBlack', 'sans-serif'],
+      'robotoMedium': ['robotoMeduim', 'sans-serif'],
+      'robotoRegular': ['robotoRegular', 'sans-serif'],
+  }
   },
   plugins: [],
 };

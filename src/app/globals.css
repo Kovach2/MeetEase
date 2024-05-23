@@ -1,33 +1,53 @@
 @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities;  
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #0F0E0E;
+    font-size: 14px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+
+@font-face {
+    font-family: "Logo";
+    src: url('/fonts/JotiOne/JotiOneRegular.ttf');
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@font-face {
+    font-family: "MontserratRegular";
+    src: url('/fonts/Montserrat/MontserratRegular.ttf');
+    font-weight: 400;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+@font-face {
+    font-family: "MontserratBlack";
+    src: url('/fonts/Montserrat/MontserratBlack.ttf');
+    font-weight: 900;
+}
+
+@font-face {
+    font-family: "MontserratSemiBold";
+    src: url('/fonts/Montserrat/MontserratSemiBold.ttf');
+    font-weight: 800;
+}
+
+
+@font-face {
+    font-family: "robotoBlack";
+    src: url('/fonts/Roboto/RobotoBlack.ttf');
+    font-weight: 900;
+}
+
+
+@font-face {
+    font-family: "robotoMedium";
+    src: url('/fonts/Roboto/RobotoMedium.ttf');
+}
+
+@font-face {
+    font-family: "robotoRegular";
+    src: url('/fonts/Roboto/RobotoRegular.ttf');
 }
