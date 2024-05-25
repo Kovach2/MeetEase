@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/header";
 import dotenv from "dotenv"
+import { SessionProvider } from "next-auth/react"
 
 dotenv.config()
 
@@ -10,18 +11,18 @@ export const metadata: Metadata = {
   description: "Веб-приложения для проведения веб-конференций",
 };
 
-export default function RootLayout({
-  children
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+interface IRootLayout {
+  children: React.ReactNode
+}
+
+export default function RootLayout({ children }: IRootLayout) {
 
   return (
-    <html lang="en">
-      <body className="bg-skyBlue">
-        <Header />
-        {children}
-      </body>
-    </html>
+      <html lang="en">
+        <body className="bg-skyBlue">
+          <Header />
+          {children}
+        </body>
+      </html>
   );
 }
