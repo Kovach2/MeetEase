@@ -3,7 +3,7 @@ import Logo from "./HeaderComponents/Logo";
 import Nav from "./HeaderComponents/Nav";
 import AccountInfo from "./HeaderComponents/AccountInfo";
 import Link from "next/link";
-import { cookies } from 'next/headers'
+import getToken from "@/context/getToken";
 
 const SignUpSingIn = () =>{
     return(
@@ -19,8 +19,7 @@ const SignUpSingIn = () =>{
 }
 
 export default function Header() {
-    const store = cookies()
-    const jwtToken = store.get("token")
+    const token = getToken()
     return(
         <header className="w-full h-[70px] bg-yellow fixed">
             <Container className="h-full">
@@ -28,7 +27,7 @@ export default function Header() {
                     <Logo />
                     <Nav />
                     {
-                        jwtToken ?
+                        token ?
                         <AccountInfo username={"Kovach"} avatar={"/images/accountIcon.png"}/>
                         :
                         <SignUpSingIn />

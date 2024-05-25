@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import { useState } from "react"
+import Cookies from "js-cookie"
 
 interface IAccountInfo {
     username: string
@@ -10,10 +11,15 @@ interface IAccountInfo {
 
 const AccountInfo = ({username, avatar} : IAccountInfo) =>{
     const [openAccountSettings, setOpenAccountSettings] = useState<boolean>(false)
-
     const openSettings = () =>{
         setOpenAccountSettings(!openAccountSettings)
     }
+
+    const signOut = () => {
+        Cookies.remove("token")
+        window.location.reload()
+    }
+
 
     return(
         <div className="relative flex items-center gap-[10px]">
@@ -59,7 +65,7 @@ const AccountInfo = ({username, avatar} : IAccountInfo) =>{
                     />
                     Настройки
                 </div>
-                <div className="flex pl-[4px] max-w-[120px] gap-[10px] font-robotoBlack text-[14px] text-black cursor-pointer select-none">
+                <div className="flex pl-[4px] max-w-[120px] gap-[10px] font-robotoBlack text-[14px] text-black cursor-pointer select-none" onClick={signOut}>
                     <Image
                         src={"/images/accountSettings/exit.png"}
                         alt="user"
