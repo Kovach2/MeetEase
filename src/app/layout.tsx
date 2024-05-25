@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Cookies from "js-cookie"
 import Header from "@/components/header";
 import dotenv from "dotenv"
 

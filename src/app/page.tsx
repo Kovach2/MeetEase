@@ -1,7 +1,6 @@
 import IntroSlider from "@/components/MainPage/introSlider";
 import IntroContent from "@/components/MainPage/introContent";
 import Container from "@/components/container";
-import Image from "next/image";
 
 export default function Home() {
   return (
@@ -11,6 +10,5 @@ export default function Home() {
           <IntroSlider/>
         </div>
     </Container>
-
   );
 }
