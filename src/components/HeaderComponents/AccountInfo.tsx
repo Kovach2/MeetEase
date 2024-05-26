@@ -1,16 +1,23 @@
 "use client"
 
 import Image from "next/image"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { IDataProfile } from "@/interfaces/profileData.interface"
 import Cookies from "js-cookie"
+import axios from "axios"
+import Link from "next/link"
 
 interface IAccountInfo {
     username: string
     avatar: string
+    jwtToken: string
 }
 
-const AccountInfo = ({username, avatar} : IAccountInfo) =>{
+const AccountInfo = ({ username, avatar, jwtToken } : IAccountInfo) =>{
+    const API_URL = process.env.NEXT_PUBLIC_API_URL
     const [openAccountSettings, setOpenAccountSettings] = useState<boolean>(false)
+    const [userData, setUserData] = useState<IDataProfile>()
+    const [loading, setLoading] = useState<boolean>(true)
     const openSettings = () =>{
         setOpenAccountSettings(!openAccountSettings)
     }
@@ -20,16 +27,36 @@ const AccountInfo = ({username, avatar} : IAccountInfo) =>{
         window.location.reload()
     }
 
+    useEffect(() =>{
+        const fetchData = async () => {
+            const resData = {
+                token: jwtToken
+            }
+          try {
+            const response = await axios.post<IDataProfile>(`${API_URL}profile`,resData)
+            const data = response.data
+            setUserData(data)
+            setLoading(false)
+          } catch (error) {
+            console.log(error)
+          }
+        }
+        jwtToken && fetchData()
+    },[])
+
 
     return(
+        !loading ?
         <div className="relative flex items-center gap-[10px]">
-            <Image
-                src={avatar}
-                alt="avatar"
-                width={38}
-                height={43}
-            />
-            <div className="font-black tracking-[1.12px]">{username}</div>
+            <Link href={"/profile"} className="flex gap-[10px] items-center">
+                <Image
+                    src={`data:image/png;base64, ${userData?.avatar}`}
+                    alt="avatar"
+                    width={38}
+                    height={43}
+                />
+                <div className={`font-black tracking-[1.12px] w-[100px] overflow-ellipsis overflow-hidden select-none`}><span>{userData?.username}</span></div>
+            </Link>
             <div 
                 className={`border-[6px] border-transparent border-t-[9px] border-t-[#0F0E0E] mt-[8px] transition-all ${openAccountSettings ? "rotate-180 mt-0 mb-[12px]" : ""}`}
                 onClick={openSettings}
@@ -76,6 +103,10 @@ const AccountInfo = ({username, avatar} : IAccountInfo) =>{
                     Выход
                 </div>
             </div>
+        </div>
+        :
+        <div className="loader">
+           
         </div>
     )
 }

@@ -1,7 +1,8 @@
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-export default function getToken (){
+export default function Unauthorized(){
     const cookiesStore = cookies()
     const token = cookiesStore.get("token")
-    return token?.value
+    !token && redirect("/")
 }

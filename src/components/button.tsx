@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 
 export default function Button({children, className} : {children:React.ReactNode, className?:string}) {
     return (
-        <div className={`bg-black w-full max-w-[130px] text-white flex items-center justify-center h-[40px] rounded-[5px] font-semiBold ${className}`}>
+        <div className={`bg-black w-full max-w-[170px] text-white cursor-pointer flex items-center justify-center h-[40px] rounded-[5px] font-semiBold ${className}`}>
             {children}
         </div>
     );
@@ -28,7 +28,7 @@ export function CodeInput({placeholder, className} : {placeholder:string, classN
                 value={confCode}
                 onChange={handleChange}
             />
-            <div className={`text-[#A8A8A8] px-0 transition-all font-semiBold select-none ${confCode && "text-blue-800 cursor-pointer hover:bg-blue-200 h-full flex items-center !px-[10px]"}`}>Присоединиться</div>
+            <div className={`text-[#A8A8A8] px-0 transition-all font-semiBold select-none rounded-[5px] ${confCode && "text-blue-800 cursor-pointer hover:bg-blue-200 h-full flex items-center !px-[10px]"}`}>Присоединиться</div>
         </div>
     );
 }

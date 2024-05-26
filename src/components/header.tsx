@@ -28,7 +28,7 @@ export default function Header() {
                     <Nav />
                     {
                         token ?
-                        <AccountInfo username={"Kovach"} avatar={"/images/accountIcon.png"}/>
+                        <AccountInfo username={"Kovach"} avatar={"/images/accountIcon.png"} jwtToken={token}/>
                         :
                         <SignUpSingIn />
                     }

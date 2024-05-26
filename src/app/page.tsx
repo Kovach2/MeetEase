@@ -1,13 +1,15 @@
-import IntroSlider from "@/components/MainPage/introSlider";
-import IntroContent from "@/components/MainPage/introContent";
+import IntroSlider from "@/components/MainPageComponents/introSlider";
+import IntroContent from "@/components/MainPageComponents/introContent";
 import Container from "@/components/container";
 
 export default function Home() {
   return (
     <Container>
-        <div className="px-[65px] h-screen flex items-center">
-          <IntroContent/>
-          <IntroSlider/>
+        <div className="px-[30px] h-screen flex items-center">
+          <div className="flex justify-between">
+            <IntroContent/>
+            <IntroSlider/>
+          </div>
         </div>
     </Container>
   );
