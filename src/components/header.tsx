@@ -24,8 +24,10 @@ export default function Header() {
         <header className="w-full h-[70px] bg-yellow fixed">
             <Container className="h-full">
                 <div className="flex h-full items-center justify-between">
-                    <Logo />
-                    <Nav />
+                    <div className="flex justify-between items-center w-full max-w-[690px]">
+                        <Logo />
+                        <Nav />
+                    </div>
                     {
                         token ?
                         <AccountInfo username={"Kovach"} avatar={"/images/accountIcon.png"} jwtToken={token}/>
