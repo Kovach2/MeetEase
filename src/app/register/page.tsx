@@ -3,6 +3,7 @@ import Container from '@/components/container'
 import MyToaster from '@/components/toaster'
 import RegisterForm from '@/components/RegisterPageComponents/registerForm'
 import getToken from '@/context/getToken'
+import Header from '@/components/header'
 import { redirect } from 'next/navigation'
 
 export default function Register() {
@@ -10,9 +11,12 @@ export default function Register() {
   token && redirect("/")
 
   return (
-    <Container>
-      <MyToaster/>
-      <RegisterForm/>  
-    </Container>
+    <>
+      <Header/>
+      <Container>
+        <MyToaster/>
+        <RegisterForm/>  
+      </Container>
+    </>
   )
 }
