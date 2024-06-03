@@ -1,10 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Image from 'next/image'
 
 
 
 interface IFriendItem {
     notUserFriend?: boolean
+}
+
+interface IFriendsList{
+    friendList: {
+        username: string
+        avatar: string
+    }[] | undefined
 }
 
 const FriendSeacrh = () =>{
@@ -53,31 +60,24 @@ const FriendItem = ( { notUserFriend } : IFriendItem) => {
     )
 }
 
-export default function FriendsList() {
-  return (
-    <div className='w-full h-full bg-[#D8E6EF] bg-opacity-[.41] rounded-[10px] pt-[10px] px-[15px]'>
-        <FriendSeacrh/>
-        <div className='flex flex-col h-full max-h-[356px] gap-[15px] pr-[5px] overflow-y-scroll scrollbar-h-[10px] scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-slate-700 scrollbar-track-slate-300 py-[10px]'>
-            <FriendItem notUserFriend={true}/>
-            <FriendItem />
-            <FriendItem />
-            <FriendItem />
-            <FriendItem />
-            <FriendItem />
-            <FriendItem />
-            <FriendItem />
-            <FriendItem />
-            <FriendItem />
-            <FriendItem />
-            <FriendItem />
-            <FriendItem />
-            <FriendItem />
-            <FriendItem />
-            <FriendItem />
-            <FriendItem />
-            <FriendItem />
-            <FriendItem />
+export default function FriendsList( { friendList } : IFriendsList ) {
+    return (
+        <div className='w-full h-full bg-[#D8E6EF] bg-opacity-[.41] rounded-[10px] pt-[20px] px-[15px]'>
+            <FriendSeacrh/>
+            {
+                friendList &&
+                <div className={`flex flex-col h-full max-h-[356px] gap-[15px] pr-[5px] ${friendList.length > 0 && "overflow-y-scroll"} scrollbar-h-[10px] scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-slate-700 scrollbar-track-slate-300 py-[10px]`}>
+                    {
+                        friendList.length > 0 ?
+                        <div>У тебя есть друзья</div>
+                        :
+                        <div className='font-bold text-black text-[18px] text-center'>
+                            У тебя нет друзей. Скорее найди их!
+                        </div>
+                    }
+                </div>
+            }
+            
         </div>
-    </div>
-  )
+    )
 }

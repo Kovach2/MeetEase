@@ -5,36 +5,18 @@ import ProfileSectionContainer from '../ProfileSectionContainer'
 import Avatar from './Avatar'
 import AccountInfo from './AccountInfo'
 import Loader from '../../loader'
-import axios from 'axios'
 import { IDataProfile } from '@/interfaces/profileData.interface'
 
 
 interface IAccountSection{
   token: string | undefined
+  profileData: IDataProfile | undefined
+  loader: boolean
 }
 
-export default function AccountSection( { token } : IAccountSection) {
-  const API_URL = process.env.NEXT_PUBLIC_API_URL
-  const [loader, setLoader] = useState<boolean>(true)
-  const [accountData, setAccountData] = useState<IDataProfile>()
- 
-  useEffect(()=>{
-    const fetchData = async () => {
-      const sendData = {
-        token: token
-      }
-      try {
-        const response = await axios.post(`${API_URL}profile`, sendData)
-        const data = response.data
-        setAccountData(data)
-        setLoader(false)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    fetchData()
-  },[])
+export default function AccountSection( { token, profileData, loader } : IAccountSection) {
 
+  const accountData : IDataProfile | undefined = profileData || undefined
 
   return (
     <ProfileSectionContainer classname='pb-[20px] h-[315px]'>

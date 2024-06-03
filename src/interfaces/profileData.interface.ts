@@ -2,6 +2,9 @@ export interface IDataProfile {
     username: string
     email: string
     avatar: string
-    friends: string[]
+    friends: {
+        username: string
+        avatar: string
+    }[]
     сonferences: string[]
 }
