@@ -2,17 +2,21 @@ import React from 'react'
 import Container from '@/components/container'
 import getToken from '@/context/getToken'
 import Unauthorized from '@/context/privatePage'
+import Header from '@/components/header'
+import ProfileContainer from '@/components/ProfileComponents/profileContainer'
+import MyToaster from '@/components/toaster'
 
-
-export default function page() {
+export default function Profile() {
     const token = getToken()
     Unauthorized()
 
     return (
-        <Container>
-            <div className='pt-[100px]'>
-                Профиль
-            </div>
-        </Container>
+        <>
+            <MyToaster/>
+            <Header/>
+            <Container>
+                <ProfileContainer token={token}/>
+            </Container> 
+        </>
     )
 }

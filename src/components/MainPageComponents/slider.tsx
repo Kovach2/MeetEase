@@ -1,5 +1,5 @@
 import React from "react";
-import Slider from "react-slick";
+import Slider, { Settings } from "react-slick";
 import Image from "next/image";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -33,12 +33,14 @@ const SliderItem = ({imageUrl, title, subtitle} : ISliderItem) => {
 
 
 export default function SimpleSlider() {
-  var settings = {
+  var settings : Settings = {
     dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 5000
   };
   return (
     <Slider {...settings} className="max-w-[450px]">

@@ -27,14 +27,20 @@ const config: Config = {
     },
     fontFamily: {
       'JotiOne': ['Logo', 'sans-serif'],
+
       'regular': ['MontserratRegular', 'sans-serif'],
-      'black': ['MontserratBlack', 'sans-serif'],
+      'medium': ['MontserratMedium', 'sans-serif'],
       'semiBold': ['MontserratSemiBold', 'sans-serif'],
+      'bold': ['MontserratBold', 'sans-serif'],
+      'black': ['MontserratBlack', 'sans-serif'],
+      
       'robotoBlack': ['robotoBlack', 'sans-serif'],
       'robotoMedium': ['robotoMeduim', 'sans-serif'],
       'robotoRegular': ['robotoRegular', 'sans-serif'],
-  }
+    }
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar')({ preferredStrategy: 'pseudoelements' }),
+  ],
 };
 export default config;

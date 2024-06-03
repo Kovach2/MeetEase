@@ -11,10 +11,14 @@
 }
 
 
+/* JotiOne */
+
 @font-face {
     font-family: "Logo";
     src: url('/fonts/JotiOne/JotiOneRegular.ttf');
 }
+
+/* Montserrat */
 
 @font-face {
     font-family: "MontserratRegular";
@@ -23,17 +27,43 @@
 }
 
 @font-face {
-    font-family: "MontserratBlack";
-    src: url('/fonts/Montserrat/MontserratBlack.ttf');
-    font-weight: 900;
+    font-family: "MontserratMedium";
+    src: url('/fonts/Montserrat/MontserratMedium.ttf');
+    font-weight: 500;
 }
 
 @font-face {
     font-family: "MontserratSemiBold";
     src: url('/fonts/Montserrat/MontserratSemiBold.ttf');
-    font-weight: 800;
+    font-weight: 600;
 }
 
+@font-face {
+    font-family: "MontserratBold";
+    src: url('/fonts/Montserrat/MontserratBold.ttf');
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: "MontserratBlack";
+    src: url('/fonts/Montserrat/MontserratBlack.ttf');
+    font-weight: 900;
+}
+
+
+
+/* Roboto */
+@font-face {
+    font-family: "robotoRegular";
+    src: url('/fonts/Roboto/RobotoRegular.ttf');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "robotoMedium";
+    src: url('/fonts/Roboto/RobotoMedium.ttf');
+    font-weight: 500;
+}
 
 @font-face {
     font-family: "robotoBlack";
@@ -42,15 +72,7 @@
 }
 
 
-@font-face {
-    font-family: "robotoMedium";
-    src: url('/fonts/Roboto/RobotoMedium.ttf');
-}
 
-@font-face {
-    font-family: "robotoRegular";
-    src: url('/fonts/Roboto/RobotoRegular.ttf');
-}
 
 .loader {
     border: 4px solid #ffffff; 
@@ -65,3 +87,12 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
+
+.account_loader{
+    border: 10px solid #ffffff; 
+    border-top: 10px solid #000000;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+}

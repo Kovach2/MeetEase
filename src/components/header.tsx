@@ -30,7 +30,7 @@ export default function Header() {
                     </div>
                     {
                         token ?
-                        <AccountInfo username={"Kovach"} avatar={"/images/accountIcon.png"} jwtToken={token}/>
+                        <AccountInfo jwtToken={token}/>
                         :
                         <SignUpSingIn />
                     }

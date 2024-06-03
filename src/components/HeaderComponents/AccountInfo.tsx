@@ -8,12 +8,10 @@ import axios from "axios"
 import Link from "next/link"
 
 interface IAccountInfo {
-    username: string
-    avatar: string
     jwtToken: string
 }
 
-const AccountInfo = ({ username, avatar, jwtToken } : IAccountInfo) =>{
+const AccountInfo = ({ jwtToken } : IAccountInfo) =>{
     const API_URL = process.env.NEXT_PUBLIC_API_URL
     const [openAccountSettings, setOpenAccountSettings] = useState<boolean>(false)
     const [userData, setUserData] = useState<IDataProfile>()
@@ -55,7 +53,7 @@ const AccountInfo = ({ username, avatar, jwtToken } : IAccountInfo) =>{
                     width={38}
                     height={43}
                 />
-                <div className={`font-black tracking-[1.12px] w-[100px] overflow-ellipsis overflow-hidden select-none`}><span>{userData?.username}</span></div>
+                <div className={`font-black tracking-[1.12px] w-full max-w-[100px] overflow-ellipsis overflow-hidden select-none`}><span>{userData?.username}</span></div>
             </Link>
             <div 
                 className={`border-[6px] border-transparent border-t-[9px] border-t-[#0F0E0E] mt-[8px] transition-all ${openAccountSettings ? "rotate-180 mt-0 mb-[12px]" : ""}`}
