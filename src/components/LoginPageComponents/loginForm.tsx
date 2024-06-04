@@ -1,5 +1,4 @@
 "use client"
-
 import React, { useState } from 'react'
 import SignInsignUpContainer, { ContainerButton, ContainerInput } from '../signInsignUpContainer'
 import toast from 'react-hot-toast'
@@ -11,7 +10,7 @@ export default function LoginForm() {
     const [loginData, setLoginData] = useState({
         username: "",
         password: ""
-      })
+    })
 
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,25 +19,36 @@ export default function LoginForm() {
           ...prevState,
           [name]: value
         }));
-      };
+    };
     
 
     const LoginButtonClick = async () =>{
-        toast.remove()
-        try {
-          const response = await axios.post(API_URL + "auth/login",loginData)
-          const data = response.data
-          Cookies.set("token", data.access_token)
-    
+      let token = ""
+      toast.remove()
+      try {
+        const response = await axios.post(API_URL + "auth/login",loginData)
+        const data = response.data
+
+        token = data.access_token
+
+        if(token.length > 0){
+          try{
+            Cookies.set("token", token)
+          }catch(error){
+            console.log(error)
+          }
+
           toast.success("Успешный вход")
           setTimeout(() =>{
-            window.location.assign("/")
+              window.location.assign("/")
           },1500)
-    
-        } catch (error) {
-          console.log(error)
-          toast.error("Не верный логин или пароль")
         }
+
+  
+      } catch (error) {
+        console.log(error)
+        toast.error("Не верный логин или пароль")
+      }
     }
 
   return (

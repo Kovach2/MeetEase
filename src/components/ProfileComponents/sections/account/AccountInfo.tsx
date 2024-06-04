@@ -3,7 +3,7 @@ import { IDataProfile } from '@/interfaces/profileData.interface'
 
 interface IAccountInfoText{
     title: string
-    subtitle: string | string[]
+    subtitle: string | string[] | {username: string, avatar:string}[]
 }
 
 interface IAccountInfo{
@@ -30,6 +30,7 @@ const AccountInfoText = ({ title, subtitle } : IAccountInfoText) =>{
 }
 
 export default function AccountInfo({ data } : IAccountInfo) {
+
   return (
     <div className='w-full px-[20px] pt-[25px] bg-[#D8E6EF] bg-opacity-40 rounded-[10px] h-[200px]'>
         <div className='flex flex-col gap-[15px]'>
@@ -39,7 +40,7 @@ export default function AccountInfo({ data } : IAccountInfo) {
                     <AccountInfoText title='Имя пользователя:' subtitle={data.username}/>
                     <AccountInfoText title='Почта:' subtitle={data.email}/>
                     <AccountInfoText title='Количество друзей:' subtitle={data.friends}/>
-                    <AccountInfoText title='Количество созданных веб-конференций:' subtitle={data.сonferences}/>
+                    <AccountInfoText title='Количество созданных веб-конференций:' subtitle={data.conferences}/>
                 </>
             }
         </div>

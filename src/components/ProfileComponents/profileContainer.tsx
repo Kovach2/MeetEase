@@ -28,6 +28,7 @@ export default function ProfileContainer( { token } : IProfileContainer ) {
           try {
             const response = await axios.post(`${API_URL}profile`, sendData)
             const data = response.data
+
             setAccountData(data)
             setLoader(false)
           } catch (error) {
@@ -35,7 +36,7 @@ export default function ProfileContainer( { token } : IProfileContainer ) {
           }
         }
         fetchData()
-      },[])
+    },[])
 
     return (
         <div className='pt-[120px]'>
@@ -47,11 +48,11 @@ export default function ProfileContainer( { token } : IProfileContainer ) {
                 }
                 {
                     activeSection === sections[1] &&
-                    <FriendsSections friendList={accountData?.friends}/>
+                    <FriendsSections token={token} friendList={accountData?.friends} ownLogin={accountData?.username}/>
                 }
                 {
                     activeSection === sections[2] &&
-                    <SettingsSection/>
+                    <SettingsSection token={token}/>
                 }
             </div>
         </div>
