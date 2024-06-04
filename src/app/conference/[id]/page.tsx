@@ -1,7 +1,11 @@
 import React from 'react'
+import VideoConference from '@/components/ConferenceComponents/VideoConference'
 
-export default function page() {
+export default function Conference() {
   return (
-    <div className='pt-[100px]'>page</div>
+    <div>
+      <h1>Video Conference</h1>
+      <VideoConference />
+    </div>
   )
 }
