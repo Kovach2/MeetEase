@@ -103,9 +103,7 @@ const AccountInfo = ({ jwtToken } : IAccountInfo) =>{
             </div>
         </div>
         :
-        <div className="loader">
-           
-        </div>
+        <div className="loader"></div>
     )
 }
 

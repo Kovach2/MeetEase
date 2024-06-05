@@ -96,3 +96,13 @@
     height: 60px;
     animation: spin 2s linear infinite;
 }
+
+
+.screen_loader{
+    border: 10px solid #ffffff; 
+    border-top: 10px solid #000000;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+}

@@ -1,11 +1,16 @@
 import React from 'react'
-import VideoConference from '@/components/ConferenceComponents/VideoConference'
+import VideoConferenceScreen from '@/components/ConferenceComponents/VideoConferenceScreen'
+import ConferenceContainer from '@/components/ConferenceComponents/ConferenceContainer'
+import getToken from '@/context/getToken'
+
 
 export default function Conference() {
+
+  const token = getToken() || ""
+
   return (
-    <div>
-      <h1>Video Conference</h1>
-      <VideoConference />
-    </div>
+    <ConferenceContainer>
+      <VideoConferenceScreen token={token}/>
+    </ConferenceContainer>
   )
 }
