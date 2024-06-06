@@ -1,28 +1,43 @@
 import React, { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 
 
 interface IVideoConferenceButtons{
     socket: WebSocket | null
     token: string
     conferenceId: string
-    setMicro: (isOn: boolean) => void
-    setCam: (isOn: boolean) => void
 }
 
-export default function VideoConferenceButtons({ socket, token, conferenceId, setMicro, setCam } : IVideoConferenceButtons) {
+export default function VideoConferenceButtons({ socket, token, conferenceId } : IVideoConferenceButtons) {
 
     const [isMicOn, setIsMicOn] = useState<boolean>(false)
     const [isCamOn, setIsCamOn] = useState<boolean>(false)
 
+    useEffect(() =>{
+        if(socket && token && conferenceId){
+            const dataMessage = JSON.stringify({
+              event: 'updateUserState',
+              data: {
+                token: token,
+                conferenceId: conferenceId,
+                micOn: isMicOn,
+                camOn: isCamOn
+              }
+            });
+            socket.send(dataMessage);
+          }else{
+            toast.error("Ошибка при отправке данных на сервер")
+          }
+    },[isMicOn, isCamOn])
+
     const handleChangeMicro = () => {
         setIsMicOn(!isMicOn)
-        setMicro(!isMicOn)
     }
 
     const handleChangeCam = () => {
         setIsCamOn(!isCamOn)
-        setCam(!isCamOn)
     }
+
 
 
     const endCall = () => {
@@ -32,7 +47,7 @@ export default function VideoConferenceButtons({ socket, token, conferenceId, se
               token: token,
               conferenceId: conferenceId
             }
-          });
+        });
         socket && socket.send(dataMessage);
         window.location.assign("/")
         socket && socket.close()

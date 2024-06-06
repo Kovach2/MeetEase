@@ -57,9 +57,7 @@ export default function VideoConferenceUser({ username, avatar, socket, width, l
               className='rounded-full border-black border'
             />
           }
-
-
-            <div className='absolute bottom-[15px] left-[15px] font-bold text-white'>{username}</div>
+          <div className='absolute bottom-[15px] left-[15px] font-bold text-white'>{username}</div>
         </div>
     </div>
   )

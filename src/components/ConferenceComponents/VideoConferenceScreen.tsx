@@ -4,6 +4,11 @@ import React, { useEffect, useState } from 'react';
 import VideoConferenceButtons from './VideoConferenceButtons';
 import VideoConferenceUser from './VideoConferenceUser';
 import ScreenLoader from './ScreenLoader';
+import Player from './Player';
+import toast from 'react-hot-toast';
+import MyToaster from '../toaster';
+import NoConference from './noConference';
+import usePeer from '@/context/usePeer';
 
 interface IVideoConferenceScreen {
   token: string;
@@ -17,6 +22,7 @@ export interface IConferenceUsers{
 }
 
 export default function VideoConferenceScreen({ token }: IVideoConferenceScreen) {
+  const { peer, myId } = usePeer()
   const API_SOCKET_URL = process.env.NEXT_PUBLIC_API_SOCKET_URL;
   const [loader, setLoader] = useState<boolean>(true)
   const [socket, setSocket] = useState<WebSocket | null>(null);
@@ -24,15 +30,26 @@ export default function VideoConferenceScreen({ token }: IVideoConferenceScreen)
   const [userWidth, setUserWidth] = useState<string>("w-full")
   const [lastUserWidth, setLastUserWidth] = useState<string>("")
   const [confId, setConfId] = useState<string>("")
-  const [microOn, setMicroOn] = useState<boolean>(false)
-  const [camOn, setcamOn] = useState<boolean>(false)
+  const [confExist, setConfExist] = useState<boolean>(false)
+  const [stream, setStream] = useState<MediaStream>()
+
+  useEffect(() => {
+    if(!peer || !stream) return
+    peer.on('call', (call) => {
+      const {peer: callerId} = call
+      call.answer(stream)
+
+      call.on('stream', (incomingStream) => {
+        console.log(`incoming stream from ${callerId}`)
+      })
+    })
+  }, [peer, stream])
 
   useEffect(() => {
     const conferenceId = window.location.href.slice(-10);
     setConfId(conferenceId)
-    const socketInstance = new WebSocket(`${API_SOCKET_URL}conference/connect`);
+    const socketInstance = new WebSocket(`${API_SOCKET_URL}conference/connect?token=${token}&conferenceId=${conferenceId}`);
     setSocket(socketInstance);
-
     socketInstance.onopen = () => {
       if(conferenceId){
         const dataMessage = JSON.stringify({
@@ -49,15 +66,19 @@ export default function VideoConferenceScreen({ token }: IVideoConferenceScreen)
     };
 
     socketInstance.onmessage = (event) => {
-      console.log(event)
       const data = JSON.parse(event.data);
       if (data.event === 'joinConference') {
+        console.log(data)
         if(data.success){
           setUsers(data.conference.users);
+          setConfExist(true)
         }else{
+          toast.error("Такой конференции не существует")
+          setLoader(false)
           console.log(data.message)
         }
       }else if(data.event === 'updateConference'){
+        console.log(data)
         if(data.success){
           setUsers(data.conference.users);
         }else{
@@ -65,17 +86,22 @@ export default function VideoConferenceScreen({ token }: IVideoConferenceScreen)
         }
       }else if(data.event === 'disconnectConference'){
         if(data.success){
-          setUsers(data.conference.users);
+          if(data.conference.users){
+            setUsers(data.conference.users);
+          }
         }else{
           console.log(data.message)
         }
       }
     };
-  }, [API_SOCKET_URL, token]);
+  }, [token]);
 
   useEffect(()=>{
     if(users.length > 0){
       setLoader(false)
+    }
+    if(users.length === 1){
+      setUserWidth("w-full")
     }
     if(users.length >= 2){
       setUserWidth("w-[50%]")
@@ -86,25 +112,34 @@ export default function VideoConferenceScreen({ token }: IVideoConferenceScreen)
   },[users])
 
   return (
-    <div className='w-full h-full bg-peach rounded-[30px]'>
+    <div>
+      <MyToaster/>
       {
         !loader ? 
-          <>
-            <div className='flex flex-[1_1_50%] flex-wrap'>
-              {
-                users &&
-                users.map((user, index) => {
-                  return(
-                    <VideoConferenceUser key={index} username={user.username} avatar={user.avatar} socket={socket} width={userWidth} lastWidth={lastUserWidth} isCamOn={camOn} isMicOn={microOn}/>
-                  )
-                })
-              }
+        (
+          confExist ? 
+          (
+            <div className='w-full h-full bg-peach rounded-[30px]'>
+              <div className='flex flex-[1_1_50%] flex-wrap'>
+                {
+                  users &&
+                  users.map((user, index) => {
+                    return(
+                        <Player key={index} username={user.username} avatar={user.avatar} width={userWidth} lastWidth={lastUserWidth} isCamOn={user.isVideoOn} isMicOn={!user.isMicroOn} setStream={setStream}/>
+                    )
+                  })
+                }
+              </div>
+              <VideoConferenceButtons socket={socket} token={token} conferenceId={confId}/>
             </div>
-            <VideoConferenceButtons socket={socket} token={token} conferenceId={confId} setMicro={setMicroOn} setCam={setcamOn}/>
-          </>
-        :
-        <ScreenLoader />
+          )
+          :
+          (<NoConference socket={socket}/>)
+        )
+          :
+          <ScreenLoader />
       }
     </div>
+    
   );
 }
