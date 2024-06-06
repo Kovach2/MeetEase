@@ -9,6 +9,7 @@ import toast from 'react-hot-toast';
 import MyToaster from '../toaster';
 import NoConference from './noConference';
 import usePeer from '@/context/usePeer';
+import Unauthorized from '@/context/privatePage';
 
 interface IVideoConferenceScreen {
   token: string;
@@ -22,6 +23,7 @@ export interface IConferenceUsers{
 }
 
 export default function VideoConferenceScreen({ token }: IVideoConferenceScreen) {
+
   const { peer, myId } = usePeer()
   const API_SOCKET_URL = process.env.NEXT_PUBLIC_API_SOCKET_URL;
   const [loader, setLoader] = useState<boolean>(true)
@@ -31,7 +33,7 @@ export default function VideoConferenceScreen({ token }: IVideoConferenceScreen)
   const [lastUserWidth, setLastUserWidth] = useState<string>("")
   const [confId, setConfId] = useState<string>("")
   const [confExist, setConfExist] = useState<boolean>(false)
-  const [stream, setStream] = useState<MediaStream>()
+  const [stream, setStream] = useState<MediaStream | null>(null)
 
   useEffect(() => {
     if(!peer || !stream) return
@@ -109,7 +111,7 @@ export default function VideoConferenceScreen({ token }: IVideoConferenceScreen)
     if(users.length % 2 === 1 && users.length !== 1){
       setLastUserWidth("last:w-full")
     }
-  },[users])
+  },[users, stream])
 
   return (
     <div>
