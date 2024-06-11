@@ -16,7 +16,9 @@ export default function VideoConferenceUser({ username, avatar, socket, width, l
   const ws = useRef<WebSocket | null>(socket);
 
   useEffect(() => {
-    navigator.mediaDevices.getUserMedia({ video: isCamOn, audio: isMicOn})
+    const currentWs = ws.current;
+
+    navigator.mediaDevices.getUserMedia({ video: isCamOn, audio: isMicOn })
       .then((stream) => {
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
@@ -26,20 +28,22 @@ export default function VideoConferenceUser({ username, avatar, socket, width, l
         console.error('Ошибка при получении доступа к камере:', err);
       });
 
-    ws.current && (ws.current.onopen = () => {
-      console.log('WebSocket connected');
-    })
+    if (currentWs) {
+      currentWs.onopen = () => {
+        console.log('WebSocket connected');
+      };
 
-    ws.current && (ws.current.onmessage = (event) => {
-      console.log('received:', event.data);
-    })
+      currentWs.onmessage = (event) => {
+        console.log('received:', event.data);
+      };
+    }
 
     return () => {
-      if (ws.current) {
-        ws.current.close();
+      if (currentWs) {
+        currentWs.close();
       }
     };
-  }, [isCamOn,isMicOn]);
+  }, [isCamOn, isMicOn]);
 
 
   return (

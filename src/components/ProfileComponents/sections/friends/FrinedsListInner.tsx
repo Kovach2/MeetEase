@@ -71,7 +71,7 @@ const FriendItem = ( { token, username, avatar, notUserFriend, updatedFriendList
                     alt='avatar'
                     src={"data:image/png;base64," + avatar}
                 />
-                <div className='text-[16px] font-bold text-[#0F0E0E]'>{username}</div>
+                <div className='text-[16px] font-bold text-[#0F0E0E] md:text-[12px]'>{username}</div>
             </div>
             <div className='flex justify-center items-center w-[30px] h-[30px] bg-[#C6D6E0] rounded-full cursor-pointer'
                 onClick={!notUserFriend ? handleButtonAddFriend : handleButtonDeleteFriend}>
@@ -126,7 +126,7 @@ export default function FrinedsListInner( { token, loader, friendList = [], find
                     (
                         findedFrineds && findedFrineds.length === 0 && searchValue.length > 0 ?
                         (
-                            <div className='font-bold text-black text-[18px] text-center'>Ничего не найдено</div>
+                            <div className='font-bold text-black text-[18px] md:text-[14px] text-center'>Ничего не найдено</div>
                         )
                         :
                         (
@@ -138,15 +138,15 @@ export default function FrinedsListInner( { token, loader, friendList = [], find
                                 (
                                     updateFriendList.map((friend, index) =>{
                                         return(
-                                            <div>
-                                                <FriendItem key={friend.username} token={token} username={friend.username} avatar={friend.avatar} notUserFriend={true} updatedFriendList={setUpdateFriendList} setUpdateLoader={setUpdateLoader}/>
+                                            <div key={index}>
+                                                <FriendItem token={token} username={friend.username} avatar={friend.avatar} notUserFriend={true} updatedFriendList={setUpdateFriendList} setUpdateLoader={setUpdateLoader}/>
                                             </div>
                                         )
                                     })
                                 )
                             :
                                 (
-                                    <div className='font-bold text-black text-[18px] text-center'>
+                                    <div className='font-bold text-black text-[18px] text-center md:text-[14px]'>
                                         У тебя нет друзей. Скорее найди их!
                                     </div>
                                 )

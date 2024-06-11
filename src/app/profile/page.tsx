@@ -3,6 +3,7 @@ import Container from '@/components/container'
 import getToken from '@/context/getToken'
 import Unauthorized from '@/context/privatePage'
 import Header from '@/components/header'
+import Footer from '@/components/footer'
 import ProfileContainer from '@/components/ProfileComponents/profileContainer'
 import MyToaster from '@/components/toaster'
 
@@ -17,6 +18,7 @@ export default function Profile() {
             <Container>
                 <ProfileContainer token={token}/>
             </Container> 
+            <Footer/>
         </>
     )
 }

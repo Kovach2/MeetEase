@@ -13,18 +13,18 @@ interface ISliderItem {
 
 const SliderItem = ({imageUrl, title, subtitle} : ISliderItem) => {
   return(
-    <div className="flex">
-      <div className="flex items-center gap-[15px]">
+    <div className="flex sm:pb-[20px]">
+      <div className="flex items-center gap-[15px]  sm:flex-col">
         <Image
           src={imageUrl}
           width={200}
           height={200}
           alt="sliderImage"
-          className="rounded-[5px]"
+          className="rounded-[5px] sm:w-[150px]"
         />
         <div>
-          <div className="font-robotoBlack mb-[10px]">{title}</div>
-          <div className="font-robotoMedium">{subtitle}</div>
+          <div className="font-robotoBlack mb-[10px] sm:text-center">{title}</div>
+          <div className="font-robotoMedium sm:text-center">{subtitle}</div>
         </div>
       </div>
     </div>
@@ -43,7 +43,7 @@ export default function SimpleSlider() {
     autoplaySpeed: 5000
   };
   return (
-    <Slider {...settings} className="max-w-[450px]">
+    <Slider {...settings} className="max-w-[450px] lg:max-w-[80%]">
       <SliderItem 
         imageUrl={"/images/introSlider/1.jpg"} 
         title={"Совместная работа в реальном времени"} 

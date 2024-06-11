@@ -14,7 +14,6 @@ const usePeer = () => {
             setPeer(myPeer)
 
             myPeer.on('open', (id: string) => {
-                console.log("yout peer id is " + id)
                 setMyId(id)
             })
         }

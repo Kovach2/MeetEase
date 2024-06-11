@@ -66,13 +66,13 @@ export default function Avatar({ avatar, token } : IAvatar) {
   }
 
   return (
-    <div className='w-full max-w-[200px]'>
+    <div className='w-full max-w-[200px] md:flex md:flex-col md:items-center'>
       <Image
         width={200}
         height={220}
         alt='avatar'
         src={"data:image/png;base64," + newAvatar}
-        className='w-full max-w-[200px] h-full max-h-[220px] bg-center bg-no-repeat bg-cover block'
+        className='w-full max-w-[200px] h-full max-h-[220px] md:max-w-[150px] bg-center bg-no-repeat bg-cover block'
       />
       {
         !saveAvatar ? 

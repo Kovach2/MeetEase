@@ -37,6 +37,13 @@ const config: Config = {
       'robotoBlack': ['robotoBlack', 'sans-serif'],
       'robotoMedium': ['robotoMeduim', 'sans-serif'],
       'robotoRegular': ['robotoRegular', 'sans-serif'],
+    },
+    screens: {
+      'lg': {'max': '1024px'},
+      '920': {'max': '920px'},
+      'md': {'max': '768px'},
+      'sm': {'max': '640px'},
+      's': {'max' : '480px'}
     }
   },
   plugins: [

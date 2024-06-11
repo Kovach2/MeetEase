@@ -27,8 +27,9 @@ export default function VideoConferenceButtons({ socket, token, conferenceId } :
             socket.send(dataMessage);
           }else{
             toast.error("Ошибка при отправке данных на сервер")
+            return
           }
-    },[isMicOn, isCamOn])
+    },[isMicOn, isCamOn, socket, token, conferenceId])
 
     const handleChangeMicro = () => {
         setIsMicOn(!isMicOn)

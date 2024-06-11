@@ -36,12 +36,12 @@ export default function ProfileContainer( { token } : IProfileContainer ) {
           }
         }
         fetchData()
-    },[])
+    },[API_URL, token])
 
     return (
-        <div className='pt-[120px]'>
-            <div className='w-full bg-[#384B52] h-auto rounded-[12px] py-[30px] px-[90px]'>
-                <ProfileNavbar setActiveSection={setActiveSection}/>
+        <div className='pt-[120px] h-screen 920:pb-[100px]'>
+            <div className='w-full bg-[#384B52] h-auto rounded-[12px] py-[30px] px-[90px] sm:px-[30px]'>
+                <ProfileNavbar setActiveSection={setActiveSection} activeSection={activeSection}/>
                 {
                     activeSection === sections[0] &&
                     <AccountSection token={token} profileData={accountData} loader={loader}/>

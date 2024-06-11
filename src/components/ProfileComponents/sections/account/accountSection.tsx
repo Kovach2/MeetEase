@@ -19,13 +19,13 @@ export default function AccountSection( { token, profileData, loader } : IAccoun
   const accountData : IDataProfile | undefined = profileData || undefined
 
   return (
-    <ProfileSectionContainer classname='pb-[20px] h-[315px]'>
+    <ProfileSectionContainer classname='pb-[20px] h-[315px] 920:h-auto'>
       {
         loader && !accountData ?
         ( <Loader/> )
         :
         (
-          <div className='flex w-full h-full gap-[30px]'>
+          <div className='flex w-full h-full gap-[30px] 920:flex-col 920:items-center'>
             <Avatar avatar={accountData?.avatar} token={token}/>
             <AccountInfo data={accountData}/>
           </div>

@@ -6,5 +6,6 @@ export interface IDataProfile {
         username: string
         avatar: string
     }[]
-    conferences: string[]
+    conferences: number
+    isAdmin: boolean
 }

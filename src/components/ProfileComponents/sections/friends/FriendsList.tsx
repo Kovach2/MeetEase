@@ -38,7 +38,7 @@ const FriendSeacrh = ( { value, handleChange } : IFriendSeacrh) =>{
             <div className='relative'>
                 <input 
                     type="text" 
-                    className={`block bg-inherit focus:outline-none border-b-[1px] placeholder:text-opacity-[.46] placeholder:text-[#000000] placeholder:text-[14px] border-b-black w-[250px] pl-[10px] pb-[2px] pr-[30px] font-bold text-[#000000]`}
+                    className={`block bg-inherit focus:outline-none border-b-[1px] placeholder:text-opacity-[.46] placeholder:text-[#000000] placeholder:text-[14px] border-b-black w-full max-w-[250px] pl-[10px] pb-[2px] pr-[30px] font-bold text-[#000000]`}
                     placeholder='Поиск...'
                     value={value}
                     onChange={handleInputChange}
@@ -96,7 +96,7 @@ export default function FriendsList( { token, friendList = [], ownLogin } : IFri
         return () => {
             clearTimeout(timer)
         }
-    }, [searchValue])
+    }, [API_URL,searchValue, token])
 
     return (
         <div className='w-full h-full bg-[#D8E6EF] bg-opacity-[.41] rounded-[10px] pt-[20px] px-[15px]'>

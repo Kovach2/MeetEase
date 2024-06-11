@@ -3,7 +3,7 @@ import { IDataProfile } from '@/interfaces/profileData.interface'
 
 interface IAccountInfoText{
     title: string
-    subtitle: string | string[] | {username: string, avatar:string}[]
+    subtitle: string | string[] | {username: string, avatar:string}[] | number
 }
 
 interface IAccountInfo{
@@ -32,7 +32,7 @@ const AccountInfoText = ({ title, subtitle } : IAccountInfoText) =>{
 export default function AccountInfo({ data } : IAccountInfo) {
 
   return (
-    <div className='w-full px-[20px] pt-[25px] bg-[#D8E6EF] bg-opacity-40 rounded-[10px] h-[200px]'>
+    <div className='w-full px-[20px] pt-[25px] bg-[#D8E6EF] bg-opacity-40 rounded-[10px] h-[200px] 920:h-auto 920:pb-[10px]'>
         <div className='flex flex-col gap-[15px]'>
             {
                 data &&
